@@ -22,5 +22,5 @@ def save_run(params, results, path):
 
 def run_experiment(params, experiment_fn, experiment_path, **kwargs):
     validate_params(params)
-    records = experiment_fn(**params, **kwargs)
-    save_run(params, records, experiment_path)
+    results = experiment_fn(**params, **kwargs)
+    save_run(params, results.view(), experiment_path)

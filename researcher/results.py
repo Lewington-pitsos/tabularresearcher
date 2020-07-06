@@ -19,5 +19,8 @@ class Results():
 
         return allocation_wise
 
-    def read(self):
-        return {"results": self.__results}
+    def readable_view(self):
+        return [x.values() for x in self.results.values()]
+    
+    def view(self):
+        return self.__results

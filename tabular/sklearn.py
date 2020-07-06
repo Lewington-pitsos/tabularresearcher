@@ -9,14 +9,14 @@ def linear_reg_experiment(data_name, folds, pipeline, metrics):
     splits = load_splits(base_df, folds, pipeline)
     results = Results()
 
-    for split, trnX, trny, valX, valy in enumerate(splits):
+    for fold, trn_x, trn_y, val_x, val_y in enumerate(splits):
         model = LinearRegression()
 
-        model.fit(trnX, trny)
-        preds = model.predict(valX)
+        model.fit(trn_x, trn_y)
+        preds = model.predict(val_x)
         for metric in metrics:
-            score = metric.fn(preds, valy)
-            results.add(split, 0, metric.name, score)
+            score = metric.fn(preds, val_y)
+            results.add(0, fold, metric.name, score)
     
     return results
     
