@@ -19,14 +19,22 @@ class KfoldIndexer():
 def load_splits(base_df, folds, pipeline):
     indexer = KfoldIndexer(folds, base_df)
 
+    splits = []
+
     for fold in folds:
         trn_idx, tst_idx = indexer.get_indices(fold)
 
-        trn = base_df.iloc[trn_idx]
-        tst = base_df.iloc[tst_idx]
+        trn = base_df.iloc[val_idx]
 
-        assert(len(base_df) == len(trn) + len(tst))
+        assert(len(base_df) == len(trn) + len(val))
 
+        modified_df, _ = pipeline.apply(base_df, trn)
+        val = modified_df.iloc[val_idx]
+        trn = modified_df.iloc[trn_idx]
+
+        splits.append(trn, val)
+    
+    return splits
 
 def kfold_generators(make_generator, make_val_generator, indices, n_folds, shuffle=True, val_prop=0.15):
     assert n_folds > 0
