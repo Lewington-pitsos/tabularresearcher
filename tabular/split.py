@@ -15,18 +15,26 @@ class KfoldIndexer():
     def all_indices(self):  
         return [idx for ary in self.splits[:] for idx in ary]
 
-def load_splits(base_df, folds, pipeline, x_cols, y_cols):
-    indexer = KfoldIndexer(folds, base_df)
+class SplitIterator():
+    def __init__(self, base_df, folds, pipeline, x_cols, y_cols):
+        self.index = 0
+        self.base_df = base_df
+        self.folds = folds
+        self.pipeline = pipeline
+        self.x_cols = x_cols
+        self.y_cols = y_cols
+        self.indexer = KfoldIndexer(folds, base_df)
 
-    splits = []
+    def __next__(self):
+        if self.index >= self.folds:
+            self.index = 0
+            raise StopIteration
 
-    for fold in folds:
-        trn_idx, val_idx = indexer.get_indices(fold)
+        trn_idx, val_idx = indexer.get_indices(self.index)
+        self.index += 1
 
         modified_df, _ = pipeline.apply(base_df, trn_idx)
         val = modified_df.iloc[val_idx]
         trn = modified_df.iloc[trn_idx]
 
-        splits.append(trn[x_cols], trn[y_cols], val[x_cols], val[y_cols])
-    
-    return splits
+        return trn[x_cols], trn[y_cols], val[x_cols], val[y_cols]
