@@ -6,8 +6,8 @@ class Pipeline():
         self.targets = targets
 
     def apply(self, df, trn_idx):
-        for proc in procs:
-            df, trn_idx = proc(df, idx, targets)
+        for proc in self.procs:
+            df, trn_idx = proc(df, trn_idx, targets)
         
         return df, trn_idx
 
@@ -45,5 +45,5 @@ def count_enc_proc(col):
     return agg_proc([col], [col], ["count"])
 
 PIPELINES = {
-    
+    "noop": Pipeline([], ["meter_reading"])
 }

@@ -30,11 +30,14 @@ class SplitIterator():
             self.index = 0
             raise StopIteration
 
-        trn_idx, val_idx = indexer.get_indices(self.index)
+        trn_idx, val_idx = self.indexer.get_indices(self.index)
         self.index += 1
 
-        modified_df, _ = pipeline.apply(base_df, trn_idx)
+        modified_df, _ = self.pipeline.apply(self.base_df, trn_idx)
         val = modified_df.iloc[val_idx]
         trn = modified_df.iloc[trn_idx]
 
-        return trn[x_cols], trn[y_cols], val[x_cols], val[y_cols]
+        return trn[self.x_cols], trn[self.y_cols], val[self.x_cols], val[self.y_cols]
+    
+    def __iter__(self):
+        return self
