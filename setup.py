@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tresearcher",
-    version="0.0.1",
+    version="0.0.2",
     author="Louka Ewington-Pitsos",
     author_email="lewingtonpitsos@gmail.com",
     description="Helps to run and analyse data science experiments where the data is tresearcher.tabular.",
@@ -14,6 +14,11 @@ setuptools.setup(
     url="https://github.com/pypa/sampleproject",
     packages=setuptools.find_packages(),
     install_requires=[
+        "sklearn==0.0",
+        "pandas==1.0.5",
+        "numpy==1.19.0",
+        "matplotlib==3.2.2",
+        "xgboost==1.1.1",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

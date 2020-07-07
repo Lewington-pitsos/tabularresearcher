@@ -2,3 +2,7 @@ env
 
 **/*.pyc
 .ipynb_checkpoints
+
+build
+dist
+tresearcher.egg-info
