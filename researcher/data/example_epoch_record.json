@@ -1,0 +1,49 @@
+{
+    "title": "test",
+    "notes": " some human readable sentence",
+    "experiment": "linear_reg",
+    "data_name": "data/train.csv",
+    "folds": 5,
+    "pipeline": "noop",
+    "metrics": [
+        "mse"
+    ],
+    "x_cols": [
+        "building_id"
+    ],
+    "y_cols": [
+        "meter_reading"
+    ],
+    "results": [
+        {
+            "mse": [
+                0.45,
+                0.78
+            ]
+        },
+        {
+            "mse": [
+                0.89,
+                0.11
+            ]
+        },
+        {
+            "mse": [
+                0.33,
+                0.21
+            ]
+        },
+        {
+            "mse": [
+                0.22,
+                0.09
+            ]
+        },
+        {
+            "mse": [
+                1.03,
+                0.72
+            ]
+        }
+    ]
+}

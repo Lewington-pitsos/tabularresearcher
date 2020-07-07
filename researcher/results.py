@@ -5,9 +5,9 @@ import numpy as np
 class Results():
     """Results provides an api to handle the collection and analysis of experiment results
     """
-    def __init__(self):
+    def __init__(self, results=[]):
         # {fold: metric: [value, value, value, ...]}
-        self.__results = []
+        self.__results = results
     
     def add(self, fold, name, value):
         if len(self.__results) == fold:
@@ -20,16 +20,12 @@ class Results():
         self.__results[fold][name].append(value)
 
     def get_metric(self, target_metric):
-        fold_wise = []
-        for fold, metrics in self.__results:
-                fold_wise.append(metrics[target_metric])
+        return [metrics[target_metric] for metrics in self.__results]
 
-        return fold_wise
-
-    def get_agg_metric(self, target_metric, agg_fn):
+    def get_fold_aggregated_metric(self, target_metric, agg_fn):
         fold_wise = []
-        for fold, metrics in self.__results:
-                fold_wise.append(metrics[target_metric])
+        for metrics in self.__results:
+            fold_wise.append(metrics[target_metric])
 
         return agg_fn(np.array(fold_wise), axis=0)
     

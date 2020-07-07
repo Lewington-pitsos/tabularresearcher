@@ -1,5 +1,5 @@
 from tabular.sklearn import *
-import researcher.experiment as exp
+from researcher import run 
 
 EXPERIMENTS = {
     "linear_reg": linear_reg_experiment,
@@ -7,4 +7,4 @@ EXPERIMENTS = {
 
 def run_experiment(params, save_path, **kwargs):
     experiment_fn = EXPERIMENTS[params["experiment"]]
-    exp.run_experiment(params, experiment_fn, save_path, **kwargs)
+    run.run_experiment(params, experiment_fn, save_path, **kwargs)

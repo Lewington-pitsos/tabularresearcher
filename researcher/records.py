@@ -5,6 +5,8 @@ import hashlib
 
 import numpy as np
 
+from researcher.experiment import *
+
 class Float32Encoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, np.float32):
@@ -46,4 +48,4 @@ def load_experiment(path, name):
 
     with open(file_name, "r") as f:
         params = json.load(f)
-    return params
+    return Experiment(params)
