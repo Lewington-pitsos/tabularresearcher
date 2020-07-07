@@ -1,7 +1,11 @@
-import sklearn
+from sklearn.metrics import *
+import numpy as np
 
 from researcher.metric import *
 
-METRICS = {
-    "mse": Metric("mse", sklearn.metrics.mean_squared_error),
-}
+metrics = [
+    Metric("mse", mean_squared_error),
+    Metric("rmsle", lambda y_true, y_pred: np.sqrt(mean_squared_log_error(y_true, np.clip(y_pred, a_min=0, a_max=None)))),
+]
+
+METRICS = {m.name:m for m in metrics}

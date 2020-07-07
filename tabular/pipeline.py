@@ -33,12 +33,12 @@ class Rescaler():
             raise ValueError("attempt to chain to an un-finalized rescaler")
             
         chained_rescaler = Rescaler()
-        chained_rescaler.add(self.apply)
         chained_rescaler.add(other.apply)
+        chained_rescaler.add(self.apply)
+        #NOTE: .finalize() below will reverse the order of application.
         chained_rescaler.finalize()
 
         return chained_rescaler
-
 
 class Pipeline():
     def __init__(self, procs, targets, rescaler=None):
@@ -70,6 +70,13 @@ def target_log1n_proc(df, trn_idx, target):
     return df, np.expm1
 def reduce_proc(cols):
     return lambda df, trn_idx, targets: (df[cols], None)
+
+def make_datetime_proc(col):
+    def datetime_proc(df, idx, target):
+        df[col] = pd.to_datetime(df[col])
+        return df, None
+    
+    return datetime_proc
 
 PIPELINES = {
     "noop": Pipeline([], ["meter_reading"])
