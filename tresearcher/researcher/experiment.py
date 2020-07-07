@@ -1,5 +1,5 @@
-from researcher import glob
-from researcher.results import *
+from tresearcher.researcher import glob
+from tresearcher.researcher.results import *
 
 class Experiment():
     def __init__(self, data):

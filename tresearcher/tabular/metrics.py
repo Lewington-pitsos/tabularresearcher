@@ -1,7 +1,7 @@
 from sklearn.metrics import *
 import numpy as np
 
-from researcher.metric import *
+from tresearcher.researcher.metric import *
 
 metrics = [
     Metric("mse", mean_squared_error),

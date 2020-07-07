@@ -1,7 +1,7 @@
 import random
 
 import numpy as np
-from tabular.glob import *
+from tresearcher.tabular.glob import *
 
 class KfoldIndexer():
     def __init__(self, folds, base_df):

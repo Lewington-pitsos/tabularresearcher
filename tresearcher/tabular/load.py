@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-from tabular.pipeline import PIPELINES
+from tresearcher.tabular.pipeline import PIPELINES
 
 def load_df(path):
     if path[-4:] == ".pkl":

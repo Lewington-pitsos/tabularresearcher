@@ -1,12 +1,12 @@
 import unittest
 import numpy as np
 
-from researcher.records import *
+from tresearcher.researcher.records import *
 
 class TestResults(unittest.TestCase):
     def setUp(self):
-        self.res = load_experiment("researcher/data/", "example_record.json").results
-        self.res_multi_epoch = load_experiment("researcher/data/", "example_epoch_record.json").results
+        self.res = load_experiment("tresearcher/researcher/data/", "example_record.json").results
+        self.res_multi_epoch = load_experiment("tresearcher/researcher/data/", "example_epoch_record.json").results
     
     def test_correctly_gathers_metric(self):
         mses = self.res.get_metric("mse")   

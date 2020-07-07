@@ -4,11 +4,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="tabularresearcher",
+    name="tresearcher",
     version="0.0.1",
     author="Louka Ewington-Pitsos",
     author_email="lewingtonpitsos@gmail.com",
-    description="Helps to run and analyse data science experiments where the data is tabular.",
+    description="Helps to run and analyse data science experiments where the data is tresearcher.tabular.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/pypa/sampleproject",
@@ -20,5 +20,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.8',
+    python_requires='>=3.7',
 )

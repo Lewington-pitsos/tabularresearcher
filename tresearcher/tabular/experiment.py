@@ -1,5 +1,5 @@
-from tabular.models import *
-from researcher import run 
+from tresearcher.tabular.models import *
+from tresearcher.researcher import run 
 
 EXPERIMENTS = {
     "linear_regression": single_epoch_experiment,

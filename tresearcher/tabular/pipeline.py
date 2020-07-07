@@ -65,6 +65,44 @@ class Pipeline():
 #
 # ---------------------------------------------------------------------------------------
 
+def agg_proc(group_cols, agg_col, aggs, agg_names=None, fill_missing=False):
+    if agg_names:
+        if len(agg_names) != len(aggs):
+            raise ValueError("If custom names are provided, one name is required for each aggregation function. Received aggregations {}, names {}".format(aggs, agg_names))
+    
+    def aggregated(df, trn_idx, targets):       
+        if agg_col in targets:
+            stats_df = df.iloc[trn_idx]
+            if not fill_missing:
+                for col in group_cols:
+                    if stats_df[col].nunique() < df[col].nunique():
+                        raise ValueError("{} values, {} for column {} exist in the training dataframe but not the validation dataframe. Ensure that the training dataframe covers all groups".format(df[col].nunique() - stats_df[col].nunique(), set(df[col].unique()) - set(stats_df[col].unique()), col))
+                        
+        else:
+            stats_df = df
+
+        grouped = stats_df[group_cols + [agg_col]].groupby(group_cols)
+        
+        for i, agg in enumerate(aggs):
+            agg_name = agg_col + "_" + agg
+            agg = grouped.agg(agg)
+
+            if agg_names:
+                new_name = agg_names[i]
+            else:
+                new_name = "-".join(group_cols) + "_wise_" + agg_name
+                
+            agg = agg.rename({agg_col: new_name}, axis=1)
+            
+            df = pd.merge(df, agg, how="left", on=group_cols, suffixes=("", ""))
+            
+            if fill_missing:
+                df = df.fillna(df[new_name].mean())
+            
+        return df, None
+    
+    return aggregated
+
 def target_log1n_proc(df, trn_idx, target):
     df[target] = np.log1p(df[target])
     return df, np.expm1

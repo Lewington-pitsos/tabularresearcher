@@ -6,8 +6,8 @@ import json
 
 import numpy as np
 
-from researcher.assist import *
-from researcher.records import *
+from tresearcher.researcher.assist import *
+from tresearcher.researcher.records import *
 
 def validate_params(params):
     if not params["title"]:

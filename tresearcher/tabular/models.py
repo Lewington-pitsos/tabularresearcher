@@ -3,11 +3,11 @@ from sklearn.linear_model import LinearRegression
 import xgboost as xgb
 
 
-from tabular.pipeline import *
-from tabular.metrics import *
-from tabular.load import *
-from tabular.split import *
-from researcher.results import *
+from tresearcher.tabular.pipeline import *
+from tresearcher.tabular.metrics import *
+from tresearcher.tabular.load import *
+from tresearcher.tabular.split import *
+from tresearcher.researcher.results import *
 
 
 def lr_maker(**kwargs):

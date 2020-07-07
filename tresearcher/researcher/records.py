@@ -5,7 +5,7 @@ import hashlib
 
 import numpy as np
 
-from researcher.experiment import *
+from tresearcher.researcher.experiment import *
 
 class Float32Encoder(json.JSONEncoder):
     def default(self, obj):
