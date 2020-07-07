@@ -5,9 +5,9 @@ import numpy as np
 class Results():
     """Results provides an api to handle the collection and analysis of experiment results
     """
-    def __init__(self, results=[]):
+    def __init__(self, results=None):
         # {fold: metric: [value, value, value, ...]}
-        self.__results = results
+        self.__results = results or []
     
     def add(self, fold, name, value):
         if len(self.__results) == fold:
