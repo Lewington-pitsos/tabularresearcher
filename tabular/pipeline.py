@@ -7,7 +7,7 @@ class Pipeline():
 
     def apply(self, df, trn_idx):
         for proc in self.procs:
-            df, trn_idx = proc(df, trn_idx, targets)
+            df, trn_idx = proc(df, trn_idx, self.targets)
         
         return df, trn_idx
 
