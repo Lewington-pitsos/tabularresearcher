@@ -16,7 +16,7 @@ setuptools.setup(
     install_requires=[
         "sklearn==0.0",
         "pandas==1.0.5",
-        "numpy==1.19.0",
+        "numpy==1.22.0",
         "matplotlib==3.2.2",
         "xgboost==1.1.1",
     ],
